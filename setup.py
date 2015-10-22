@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Setup script."""
 import os
 try:
     from setuptools import setup
@@ -22,7 +23,12 @@ setup(
     url='http://github.com/max-arnold/block-disposable-email',
     keywords='block disposable email domains',
     description='Python client for http://block-disposable-email.com',
-    long_description=open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'README.md')), 'r').read(),
+    long_description=open(
+        os.path.abspath(os.path.join(os.path.dirname(__file__),
+                        'README.md')
+                        ),
+        'r'
+        ).read(),
     classifiers=[
         'Development Status :: 3 - Alpha',
         "Intended Audience :: System Administrators",
