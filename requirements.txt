@@ -1,0 +1,2 @@
+# These dependencies are required only for development
+ipython==4.0.0
