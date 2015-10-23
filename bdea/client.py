@@ -57,8 +57,8 @@ class BDEAClient(object):
             res = urlopen(url, timeout=timeout)
         except URLError as e:
             return None
+
         try:
-            obj = json.loads(res.read())
+            return json.loads(res.read())
         except ValueError:
             return None
-
