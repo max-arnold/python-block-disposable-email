@@ -68,7 +68,7 @@ class BDEAClient(object):
         res = self.request(self.STATUS_API_URL.format(apikey=self.apikey))
         return BDEAStatusResponse(res)
 
-    def get_domain_status(self, domain):
+    def get_status(self, domain):
         """Get domain status and return BDEAResponse."""
         res = self.request(self.API_URL.format(apikey=self.apikey, domain=domain))
         return BDEAResponse(res)
