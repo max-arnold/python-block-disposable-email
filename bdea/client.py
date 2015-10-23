@@ -4,9 +4,13 @@
 http://www.block-disposable-email.com/cms/help-and-usage/easy-api/
 """
 try:
+    # PY3
     from urllib.request import urlopen
+    from urllib.error import URLError
 except ImportError:
-    from urllib import urlopen
+    # PY2
+    from urllib2 import urlopen
+    from urllib2 import URLError
 
 import json
 
@@ -41,6 +45,20 @@ class BDEAClient(object):
     TEST_DOMAIN_OK = 'ok.bdea.cc'
     TEST_DOMAIN_BLOCK = 'block.bdea.cc'
 
-    def __init__(self, apikey):
+    def __init__(self, apikey, timeout=5):
         """Initialize API client."""
         self.apikey = apikey
+        self.timeout = timeout
+
+    def request(self, url, timeout=None):
+        """Make HTTP GET request and return parsed JSON dict or None if error."""
+        timeout = timeout or self.timeout
+        try:
+            res = urlopen(url, timeout=timeout)
+        except URLError as e:
+            return None
+        try:
+            obj = json.loads(res.read())
+        except ValueError:
+            return None
+
