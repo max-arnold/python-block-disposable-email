@@ -32,6 +32,22 @@ class BDEAStatusResponse(object):
         """Initialize status response."""
         self.response = response
 
+    def is_valid(self):
+        """Return True if status is ok and key is valid, otherwise False."""
+        req_status = self.response.get('request_status', None)
+        key_status = self.response.get('apikeystatus', None)
+        if req_status == 'ok' and key_status == 'active':
+            return True
+        return False
+
+    def credit_status(self):
+        """Return credits status - good, low, exhausted."""
+        return self.response.get('commercial_credit_status', 'exhausted')
+
+    def credits(self):
+        """Return amount of credits."""
+        return int(self.response.get('credits', '0'))
+
 
 class BDEAClient(object):
 
