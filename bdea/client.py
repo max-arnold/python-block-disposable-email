@@ -70,5 +70,7 @@ class BDEAClient(object):
 
     def get_status(self, domain):
         """Get domain status and return BDEAResponse."""
+        if '@' in domain:
+            raise ValueError('Please specify domain, not email address {}'.format(domain))
         res = self.request(self.API_URL.format(apikey=self.apikey, domain=domain))
         return BDEAResponse(res)

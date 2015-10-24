@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from io import StringIO
 
+import pytest
 from mock import patch
 
 from bdea.client import BDEAClient, URLError
@@ -27,6 +28,11 @@ class TestBDEAClientRequest(object):
             urlopen_mock.return_value = StringIO('{"blah": "blah"}')
             cl = BDEAClient('token')
             assert cl.request('http://www.rottentomatoes.com/') == {'blah': 'blah'}
+
+    def test_do_not_accept_email(self):
+        cl = BDEAClient('token')
+        with pytest.raises(ValueError):
+            cl.get_status('email@example.com')
 
 
 class TestBDEAClientLive(object):
