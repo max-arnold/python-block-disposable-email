@@ -56,12 +56,12 @@ class BDEAClient(object):
         try:
             res = urlopen(url, timeout=timeout)
         except URLError as e:
-            return None
+            return {}
 
         try:
             return json.loads(res.read())
         except ValueError:
-            return None
+            return {}
 
     def get_api_status(self):
         """Check API/token status and return BDEAStatusResponse."""

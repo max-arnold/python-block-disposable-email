@@ -11,17 +11,17 @@ from bdea.client import BDEAClient, URLError
 
 class TestBDEAClientRequest(object):
 
-    def test_urlerror_returns_none(self):
+    def test_urlerror_returns_empty(self):
         with patch('bdea.client.urlopen') as urlopen_mock:
             urlopen_mock.side_effect = URLError('No luck!')
             cl = BDEAClient('token')
-            assert cl.request('http://www.rottentomatoes.com/') == None
+            assert cl.request('http://www.rottentomatoes.com/') == {}
 
-    def test_invalid_json_returns_none(self):
+    def test_invalid_json_returns_empty(self):
         with patch('bdea.client.urlopen') as urlopen_mock:
             urlopen_mock.return_value = StringIO('invalid json')
             cl = BDEAClient('token')
-            assert cl.request('http://www.rottentomatoes.com/') == None
+            assert cl.request('http://www.rottentomatoes.com/') == {}
 
     def test_valid_json(self):
         with patch('bdea.client.urlopen') as urlopen_mock:
