@@ -59,7 +59,10 @@ class BDEAClient(object):
             return {}
 
         try:
-            return json.loads(res.read())
+            body = res.read()
+            if isinstance(body, bytes):
+                body = body.decode('utf-8')
+            return json.loads(body)
         except ValueError:
             return {}
 
