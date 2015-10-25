@@ -7,7 +7,8 @@ import json
 import pytest
 from mock import patch
 
-from bdea.client import BDEAClient, URLError, is_disposable
+from bdea.client import BDEAClient, URLError
+from bdea.client import is_disposable_domain, is_disposable_email
 
 
 class TestBDEAClientRequest(object):
@@ -46,17 +47,29 @@ class TestShortcut(object):
         'version': '0.2'
     }
 
-    def test_shortcut_function(self):
+    def test_domain_shortcut_function(self):
         with patch('bdea.client.urlopen') as urlopen_mock:
             res = self.RESPONSE.copy()
             urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
-            assert is_disposable('google.com', 'token') == False
+            assert is_disposable_domain('google.com', 'token') == False
 
             res.update({
                 'domain_status': 'block'
             })
             urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
-            assert is_disposable('mailinator.com', 'token') == True
+            assert is_disposable_domain('mailinator.com', 'token') == True
+
+    def test_email_shortcut_function(self):
+        with patch('bdea.client.urlopen') as urlopen_mock:
+            res = self.RESPONSE.copy()
+            urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
+            assert is_disposable_email('email@example.com', 'token') == False
+
+            res.update({
+                'domain_status': 'block'
+            })
+            urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
+            assert is_disposable_email('spam@mailinator.com', 'token') == True
 
 
 class TestBDEAClientLive(object):
