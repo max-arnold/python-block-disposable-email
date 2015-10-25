@@ -12,7 +12,7 @@ from bdea.django_validators import disposable_email_validator
 
 settings.configure(
     DEBUG=True,
-    BDEA_TOKEN='bdea-token'
+    BDEA_APIKEY='bdea-apikey'
 )
 
 
@@ -47,5 +47,5 @@ class TestDjangoValidator(object):
             res = self.RESPONSE.copy()
             urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
             disposable_email_validator('email@example.com')
-            url = 'http://check.block-disposable-email.com/easyapi/json/bdea-token/example.com'
+            url = 'http://check.block-disposable-email.com/easyapi/json/bdea-apikey/example.com'
             urlopen_mock.assert_called_with(url, timeout=5)

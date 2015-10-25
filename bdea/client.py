@@ -126,12 +126,12 @@ class BDEAClient(object):
         return BDEAResponse(res)
 
 
-def is_disposable_domain(domain, token):
+def is_disposable_domain(domain, apikey):
     """Shortcut function to check domain disposability."""
-    return BDEAClient(token).get_domain_status(domain).is_disposable()
+    return BDEAClient(apikey).get_domain_status(domain).is_disposable()
 
 
-def is_disposable_email(email, token):
+def is_disposable_email(email, apikey):
     """Shortcut function to check email disposability."""
     domain = email.rsplit('@', 1)[-1]
-    return BDEAClient(token).get_domain_status(domain).is_disposable()
+    return BDEAClient(apikey).get_domain_status(domain).is_disposable()

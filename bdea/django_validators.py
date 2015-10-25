@@ -10,6 +10,6 @@ from bdea.client import is_disposable_email
 
 def disposable_email_validator(email):
     """Disposable email validator."""
-    token = settings.BDEA_TOKEN
-    if is_disposable_email(email, token):
+    apikey = settings.BDEA_APIKEY
+    if is_disposable_email(email, apikey):
         raise ValidationError(_('Temporary or disposable email addresses are not allowed'))
