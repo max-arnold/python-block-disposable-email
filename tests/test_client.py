@@ -34,7 +34,7 @@ class TestBDEAClientRequest(object):
     def test_do_not_accept_email(self):
         cl = BDEAClient('token')
         with pytest.raises(ValueError):
-            cl.get_status('email@example.com')
+            cl.get_domain_status('email@example.com')
 
 
 class TestBDEAClient(object):
@@ -51,7 +51,7 @@ class TestBDEAClient(object):
         with patch('bdea.client.urlopen') as urlopen_mock:
             urlopen_mock.return_value = StringIO('{}')
             cl = BDEAClient('token')
-            cl.get_status('example.com')
+            cl.get_domain_status('example.com')
             url = 'http://check.block-disposable-email.com/easyapi/json/token/example.com'
             urlopen_mock.assert_called_with(url, timeout=5)
 
@@ -60,12 +60,12 @@ class TestBDEAClientLive(object):
     TOKEN_INVALID = 'invalid-unittest-token'
 
     def test_invalid_token_domain_ok(self):
-        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_OK)
+        res = BDEAClient(self.TOKEN_INVALID).get_domain_status(BDEAClient.TEST_DOMAIN_OK)
         assert res.response['domain_status'] == 'ok'
         assert res.response['request_status'] == 'fail_key'
 
     def test_invalid_token_domain_block(self):
-        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_BLOCK)
+        res = BDEAClient(self.TOKEN_INVALID).get_domain_status(BDEAClient.TEST_DOMAIN_BLOCK)
         assert res.response['domain_status'] == 'ok'
         assert res.response['request_status'] == 'fail_key'
 

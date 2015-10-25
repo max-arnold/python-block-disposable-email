@@ -118,7 +118,7 @@ class BDEAClient(object):
         res = self.request(self.STATUS_API_URL.format(apikey=self.apikey))
         return BDEAStatusResponse(res)
 
-    def get_status(self, domain):
+    def get_domain_status(self, domain):
         """Get domain status and return BDEAResponse."""
         if '@' in domain:
             raise ValueError('Please specify domain, not email address {}'.format(domain))
@@ -128,10 +128,10 @@ class BDEAClient(object):
 
 def is_disposable_domain(domain, token):
     """Shortcut function to check domain disposability."""
-    return BDEAClient(token).get_status(domain).is_disposable()
+    return BDEAClient(token).get_domain_status(domain).is_disposable()
 
 
 def is_disposable_email(email, token):
     """Shortcut function to check email disposability."""
     domain = email.rsplit('@', 1)[-1]
-    return BDEAClient(token).get_status(domain).is_disposable()
+    return BDEAClient(token).get_domain_status(domain).is_disposable()
