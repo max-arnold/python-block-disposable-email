@@ -37,6 +37,44 @@ class TestBDEAClientRequest(object):
             cl.get_status('email@example.com')
 
 
+class TestBDEAClient(object):
+
+    def test_status_urlopen_args(self):
+        with patch('bdea.client.urlopen') as urlopen_mock:
+            urlopen_mock.return_value = StringIO('{}')
+            cl = BDEAClient('token')
+            cl.get_api_status()
+            url = 'http://status.block-disposable-email.com/status/?apikey=token'
+            urlopen_mock.assert_called_with(url, timeout=5)
+
+    def test_domain_urlopen_args(self):
+        with patch('bdea.client.urlopen') as urlopen_mock:
+            urlopen_mock.return_value = StringIO('{}')
+            cl = BDEAClient('token')
+            cl.get_status('example.com')
+            url = 'http://check.block-disposable-email.com/easyapi/json/token/example.com'
+            urlopen_mock.assert_called_with(url, timeout=5)
+
+
+class TestBDEAClientLive(object):
+    TOKEN_INVALID = 'invalid-unittest-token'
+
+    def test_invalid_token_domain_ok(self):
+        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_OK)
+        assert res.response['domain_status'] == 'ok'
+        assert res.response['request_status'] == 'fail_key'
+
+    def test_invalid_token_domain_block(self):
+        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_BLOCK)
+        assert res.response['domain_status'] == 'ok'
+        assert res.response['request_status'] == 'fail_key'
+
+    def test_invalid_token_api_status(self):
+        res = BDEAClient(self.TOKEN_INVALID).get_api_status()
+        assert res.response['request_status'] == 'ok'
+        assert res.response['apikeystatus'] == 'inactive'
+
+
 class TestShortcut(object):
     RESPONSE = {
         'domain_status': 'ok',
@@ -70,22 +108,3 @@ class TestShortcut(object):
             })
             urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
             assert is_disposable_email('spam@mailinator.com', 'token') == True
-
-
-class TestBDEAClientLive(object):
-    TOKEN_INVALID = 'invalid-unittest-token'
-
-    def test_invalid_token_domain_ok(self):
-        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_OK)
-        assert res.response['domain_status'] == 'ok'
-        assert res.response['request_status'] == 'fail_key'
-
-    def test_invalid_token_domain_block(self):
-        res = BDEAClient(self.TOKEN_INVALID).get_status(BDEAClient.TEST_DOMAIN_BLOCK)
-        assert res.response['domain_status'] == 'ok'
-        assert res.response['request_status'] == 'fail_key'
-
-    def test_invalid_token_api_status(self):
-        res = BDEAClient(self.TOKEN_INVALID).get_api_status()
-        assert res.response['request_status'] == 'ok'
-        assert res.response['apikeystatus'] == 'inactive'
