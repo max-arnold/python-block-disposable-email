@@ -23,6 +23,37 @@ class BDEAResponse(object):
         """Initialize response."""
         self.response = response
 
+    def is_disposable(self):
+        """Return True if domain is disposable or malformed, otherwise False."""
+        req_status = self.response.get('request_status', 'fail_server')
+
+        # something went wrong, return False
+        if req_status in (
+                'fail_key',
+                'fail_server',
+                'fail_parameter_count',
+                'fail_key_low_credits'):
+            return False
+
+        # invalid or nonexistent domain
+        if req_status == 'fail_input_domain':
+            return True
+
+        dom_status = self.response.get('domain_status', 'ok')
+
+        # domain is disposable
+        if req_status == 'success' and dom_status == 'block':
+            return True
+
+        return False
+
+    def request_status(self):
+        """Return True if a request was successful, otherwise False."""
+        req_status = self.response.get('request_status', 'fail_server')
+        if req_status == 'success':
+            return True
+        return False
+
 
 class BDEAStatusResponse(object):
 
