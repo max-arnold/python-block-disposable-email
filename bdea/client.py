@@ -47,7 +47,7 @@ class BDEAResponse(object):
 
         return False
 
-    def request_status(self):
+    def status(self):
         """Return True if a request was successful, otherwise False."""
         req_status = self.response.get('request_status', 'fail_server')
         if req_status == 'success':
@@ -63,7 +63,7 @@ class BDEAStatusResponse(object):
         """Initialize status response."""
         self.response = response
 
-    def is_valid(self):
+    def status(self):
         """Return True if status is ok and key is valid, otherwise False."""
         req_status = self.response.get('request_status', None)
         key_status = self.response.get('apikeystatus', None)

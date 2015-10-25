@@ -17,17 +17,17 @@ class TestBDEAStatus(object):
 
     def test_empty_response_status_false(self):
         res = BDEAResponse({})
-        assert res.request_status() == False
+        assert res.status() == False
 
     def test_empty_response_means_domain_is_not_disposable(self):
         res = BDEAResponse({})
         assert res.is_disposable() == False
 
-    def test_request_status_true(self):
+    def test_status_true(self):
         res = BDEAResponse(self.RESPONSE)
-        assert res.request_status() == True
+        assert res.status() == True
 
-    def test_request_status_false(self):
+    def test_status_false(self):
         for rs in ('fail_key',
                    'fail_server',
                    'fail_input_domain',
@@ -35,7 +35,7 @@ class TestBDEAStatus(object):
                    'fail_key_low_credits'):
             res = self.RESPONSE.copy()
             res['request_status'] = rs
-            assert BDEAResponse(res).request_status() == False
+            assert BDEAResponse(res).status() == False
 
     def test_disposable_domain(self):
         res = self.RESPONSE.copy()

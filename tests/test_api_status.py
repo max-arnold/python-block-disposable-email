@@ -19,7 +19,7 @@ class TestBDEAStatusResponse(object):
 
     def test_empty_response_is_not_valid(self):
         res = BDEAStatusResponse({})
-        assert res.is_valid() == False
+        assert res.status() == False
 
     def test_empty_response_means_zero_credits(self):
         res = BDEAStatusResponse({})
@@ -35,19 +35,19 @@ class TestBDEAStatusResponse(object):
             'request_status': 'ok',
             'apikeystatus': 'active'
         })
-        assert BDEAStatusResponse(res).is_valid() == True
+        assert BDEAStatusResponse(res).status() == True
 
         res.update({
             'request_status': 'ok',
             'apikeystatus': 'inactive'
         })
-        assert BDEAStatusResponse(res).is_valid() == False
+        assert BDEAStatusResponse(res).status() == False
 
         res.update({
             'request_status': 'fail',
             'apikeystatus': 'active'
         })
-        assert BDEAStatusResponse(res).is_valid() == False
+        assert BDEAStatusResponse(res).status() == False
 
     def test_credit_status(self):
         res = self.RESPONSE.copy()
