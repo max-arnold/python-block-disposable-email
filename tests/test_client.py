@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from io import StringIO
+import json
 
 import pytest
 from mock import patch
 
-from bdea.client import BDEAClient, URLError
+from bdea.client import BDEAClient, URLError, is_disposable
 
 
 class TestBDEAClientRequest(object):
@@ -33,6 +34,29 @@ class TestBDEAClientRequest(object):
         cl = BDEAClient('token')
         with pytest.raises(ValueError):
             cl.get_status('email@example.com')
+
+
+class TestShortcut(object):
+    RESPONSE = {
+        'domain_status': 'ok',
+        'execution_time': 0.0052359104156494,
+        'request_status': 'success',
+        'server_id': 'mirror5_vienna',
+        'servertime': '2015-10-25 5:25:54',
+        'version': '0.2'
+    }
+
+    def test_shortcut_function(self):
+        with patch('bdea.client.urlopen') as urlopen_mock:
+            res = self.RESPONSE.copy()
+            urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
+            assert is_disposable('google.com', 'token') == False
+
+            res.update({
+                'domain_status': 'block'
+            })
+            urlopen_mock.return_value = StringIO('{}'.format(json.dumps(res)))
+            assert is_disposable('mailinator.com', 'token') == True
 
 
 class TestBDEAClientLive(object):

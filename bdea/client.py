@@ -124,3 +124,8 @@ class BDEAClient(object):
             raise ValueError('Please specify domain, not email address {}'.format(domain))
         res = self.request(self.API_URL.format(apikey=self.apikey, domain=domain))
         return BDEAResponse(res)
+
+
+def is_disposable(domain, token):
+    """Shortcut function to check domain disposability."""
+    return BDEAClient(token).get_status(domain).is_disposable()
