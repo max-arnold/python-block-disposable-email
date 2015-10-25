@@ -31,11 +31,11 @@ Simple usage (domain)
 Django validator
 ----------------
 
-Add your token to Django settings.py:
+Add your apikey to Django settings.py:
 
      BDEA_APIKEY = 'example_apikey_12345'
 
-Add validator to our FormField:
+Add validator to your EmailField:
 
     from django import forms
     from bdea.django_validators import disposable_email_validator
