@@ -7,7 +7,7 @@ except ImportError:
     from distutils.core import setup
 
 __author__ = 'Max Arnold <arnold.maxim@gmail.com>'
-__version__ = '0.1'
+__version__ = '1.0'
 
 
 setup(
@@ -20,9 +20,9 @@ setup(
     author='Max Arnold',
     author_email='arnold.maxim@gmail.com',
     license='BSD',
-    url='http://github.com/max-arnold/block-disposable-email',
+    url='http://github.com/max-arnold/python-block-disposable-email',
     keywords='block disposable email domains',
-    description='Python client for http://block-disposable-email.com',
+    description='Python client for block-disposable-email.com',
     long_description=open(
         os.path.abspath(os.path.join(os.path.dirname(__file__),
                         'README.md')
