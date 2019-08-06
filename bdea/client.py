@@ -2,6 +2,8 @@
 """Python client for block-disposable-email.com service.
 
 http://www.block-disposable-email.com/cms/help-and-usage/easy-api/
+http://www.block-disposable-email.com/cms/help-and-usage/status-api/
+http://www.block-disposable-email.com/cms/help-and-usage/recently-added-domains-api/
 """
 try:
     # PY3
@@ -88,7 +90,8 @@ class BDEAClient(object):
                'easyapi/json/{apikey}/{domain}')
     STATUS_API_URL = ('http://status.block-disposable-email.com/'
                       'status/?apikey={apikey}')
-
+    RECENT_API_URL = (' http://status.block-disposable-email.com/'
+                      'dea_recently_added.php?apikey={apikey}')
     TEST_DOMAIN_OK = 'ok.bdea.cc'
     TEST_DOMAIN_BLOCK = 'block.bdea.cc'
 
@@ -117,6 +120,7 @@ class BDEAClient(object):
         """Check API/token status and return BDEAStatusResponse."""
         res = self.request(self.STATUS_API_URL.format(apikey=self.apikey))
         return BDEAStatusResponse(res)
+
 
     def get_domain_status(self, domain):
         """Get domain status and return BDEAResponse."""
