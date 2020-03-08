@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 """Setup script."""
 import os
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 __author__ = 'Max Arnold <arnold.maxim@gmail.com>'
 __version__ = '1.0.1'
