@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from io import StringIO
 import json
 
@@ -56,7 +57,9 @@ class TestBDEAClient(object):
 
 class TestBDEAClientLive(object):
     APIKEY_INVALID = 'invalid-unittest-apikey'
-    APIKEY_VALID = 'YOUR-OWN-VALID-APIKEY'
+
+    def _get_api_key(self):
+        return os.environ.get('BDEA_APIKEY', self.APIKEY_INVALID)
 
     def test_invalid_apikey_domain_ok(self):
         res = BDEAClient(self.APIKEY_INVALID).get_domain_status(BDEAClient.TEST_DOMAIN_OK)
@@ -75,19 +78,19 @@ class TestBDEAClientLive(object):
 
     @pytest.mark.xfail
     def test_valid_apikey_api_status(self):
-        res = BDEAClient(self.APIKEY_VALID).get_api_status()
+        res = BDEAClient(self._get_api_key()).get_api_status()
         assert res.response['request_status'] == 'ok'
         assert res.response['apikeystatus'] == 'active'
 
     @pytest.mark.xfail
     def test_valid_apikey_domain_ok(self):
-        res = BDEAClient(self.APIKEY_VALID).get_domain_status(BDEAClient.TEST_DOMAIN_OK)
+        res = BDEAClient(self._get_api_key()).get_domain_status(BDEAClient.TEST_DOMAIN_OK)
         assert res.response['domain_status'] == 'ok'
         assert res.response['request_status'] == 'success'
 
     @pytest.mark.xfail
     def test_valid_apikey_domain_block(self):
-        res = BDEAClient(self.APIKEY_VALID).get_domain_status(BDEAClient.TEST_DOMAIN_BLOCK)
+        res = BDEAClient(self._get_api_key()).get_domain_status(BDEAClient.TEST_DOMAIN_BLOCK)
         assert res.response['domain_status'] == 'block'
         assert res.response['request_status'] == 'success'
 
