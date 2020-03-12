@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from io import StringIO
 import json
 
 import pytest
-from mock import patch
+from unittest.mock import patch
 
 from bdea.client import BDEAClient, URLError
 from bdea.client import is_disposable_domain, is_disposable_email

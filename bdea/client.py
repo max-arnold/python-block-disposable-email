@@ -5,14 +5,8 @@ http://www.block-disposable-email.com/cms/help-and-usage/easy-api/
 http://www.block-disposable-email.com/cms/help-and-usage/status-api/
 http://www.block-disposable-email.com/cms/help-and-usage/recently-added-domains-api/
 """
-try:
-    # PY3
-    from urllib.request import urlopen
-    from urllib.error import URLError
-except ImportError:
-    # PY2
-    from urllib2 import urlopen
-    from urllib2 import URLError
+from urllib.request import urlopen
+from urllib.error import URLError
 
 import json
 

@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import json
 import pytest
 from io import StringIO
-from mock import patch
+from unittest.mock import patch
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
