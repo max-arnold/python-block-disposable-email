@@ -12,9 +12,9 @@ Simple usage (email)
     from bdea.client import is_disposable_email
 
     if is_disposable_email('spam@mailinator.com', 'example_apikey_12345'):
-        print "Email is disposable"
+        print("Email is disposable")
     else:
-        print "Email is valid"
+        print("Email is valid")
 
 
 Simple usage (domain)
@@ -23,9 +23,9 @@ Simple usage (domain)
     from bdea.client import is_disposable_domain
 
     if is_disposable_domain('mailinator.com', 'example_apikey_12345'):
-        print "Domain is disposable"
+        print("Domain is disposable")
     else:
-        print "Domain is valid"
+        print("Domain is valid")
 
 
 Django validator
@@ -53,17 +53,17 @@ Advanced usage
 
     # examine API status
     res = cl.get_api_status()
-    print res.status(), res.credit_status(), res.credits()
+    print(res.status(), res.credit_status(), res.credits())
 
     # get raw API response
-    print res.response
+    print(res.response)
 
     # validate domain
     res = cl.get_domain_status('mailinator.com')
-    print res.is_disposable(), res.status()
+    print(res.is_disposable(), res.status())
 
     # get raw API response
-    print res.response
+    print(res.response)
 
 
 Development
