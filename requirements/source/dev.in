@@ -1,4 +1,5 @@
 -r pip-tools.in
 -r test.in
 
+django<3.0  # Lowest common denominator that works on Py3.5
 ipython

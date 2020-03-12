@@ -11,7 +11,7 @@ backcall==0.1.0           # via ipython
 click==7.1.1              # via pip-tools
 decorator==4.4.2          # via ipython, traitlets
 distlib==0.3.0            # via virtualenv
-django==2.2.11            # via -r requirements/source/test.in
+django==2.2.11            # via -r requirements/source/dev.in
 filelock==3.0.12          # via tox, virtualenv
 ipython-genutils==0.2.0   # via traitlets
 ipython==7.13.0           # via -r requirements/source/dev.in

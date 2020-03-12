@@ -1,3 +1,2 @@
-django<3.0  # Lowest common denominator that works on Py3.5
 tox
 pytest
