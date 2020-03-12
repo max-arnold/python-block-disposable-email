@@ -73,7 +73,7 @@ To bootstrap your development environment, install virtualenvwrapper and run the
 
     mkvirtualenv disposable
     setvirtualenvproject
-    pip install -r requirements.txt
+    pip install -r requirements/dev.txt
     pip install -e ./
 
 To run tests use py.test, or run the following command:
