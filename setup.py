@@ -27,11 +27,14 @@ setup(
         'r'
         ).read(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        "Intended Audience :: System Administrators",
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Internet'
+        'Topic :: Internet',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
     ],
     packages=['bdea'],
     platforms='any',
