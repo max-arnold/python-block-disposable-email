@@ -4,7 +4,7 @@ import os
 from setuptools import setup
 
 __author__ = 'Max Arnold <arnold.maxim@gmail.com>'
-__version__ = '1.0.1'
+__version__ = '2.0.0'
 
 
 setup(
