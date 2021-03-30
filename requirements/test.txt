@@ -4,18 +4,53 @@
 #
 #    pip-compile --output-file=requirements/test.txt requirements/source/test.in
 #
-appdirs==1.4.3            # via virtualenv
-attrs==19.3.0             # via pytest
-distlib==0.3.0            # via virtualenv
-filelock==3.0.12          # via tox, virtualenv
-more-itertools==8.2.0     # via pytest
-packaging==20.3           # via pytest, tox
-pluggy==0.13.1            # via pytest, tox
-py==1.8.1                 # via pytest, tox
-pyparsing==2.4.6          # via packaging
-pytest==5.3.5             # via -r requirements/source/test.in
-six==1.14.0               # via packaging, tox, virtualenv
-toml==0.10.0              # via tox
-tox==3.14.5               # via -r requirements/source/test.in
-virtualenv==20.0.10       # via tox
-wcwidth==0.1.8            # via pytest
+appdirs==1.4.4
+    # via virtualenv
+attrs==20.3.0
+    # via pytest
+distlib==0.3.1
+    # via virtualenv
+filelock==3.0.12
+    # via
+    #   tox
+    #   virtualenv
+importlib-metadata==3.10.0
+    # via
+    #   pluggy
+    #   pytest
+    #   tox
+    #   virtualenv
+iniconfig==1.1.1
+    # via pytest
+packaging==20.9
+    # via
+    #   pytest
+    #   tox
+pluggy==0.13.1
+    # via
+    #   pytest
+    #   tox
+py==1.10.0
+    # via
+    #   pytest
+    #   tox
+pyparsing==2.4.7
+    # via packaging
+pytest==6.2.2
+    # via -r requirements/source/test.in
+six==1.15.0
+    # via
+    #   tox
+    #   virtualenv
+toml==0.10.2
+    # via
+    #   pytest
+    #   tox
+tox==3.23.0
+    # via -r requirements/source/test.in
+typing-extensions==3.7.4.3
+    # via importlib-metadata
+virtualenv==20.4.3
+    # via tox
+zipp==3.4.1
+    # via importlib-metadata
