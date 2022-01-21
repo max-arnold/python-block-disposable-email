@@ -35,7 +35,7 @@ iniconfig==1.1.1
     # via pytest
 ipython-genutils==0.2.0
     # via traitlets
-ipython==7.22.0
+ipython==7.31.1
     # via -r requirements/source/dev.in
 jedi==0.18.0
     # via ipython
